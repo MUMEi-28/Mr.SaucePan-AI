@@ -1,11 +1,13 @@
-export default function IngredientItem()
+export default function IngredientItem(props)
 {
     return (
         <section>
             <div className="ingridientItem">
-                <h4>1 1/2 cup all purpose flour</h4>
-                <button>Remove</button>
+                {props.ingredientsItem}
+                <button onClick={() => props.removeIngredients(props.index)} >Remove</button>
             </div>
         </section>
     )
 }
+
+/* props.handleClick(props.index) */
