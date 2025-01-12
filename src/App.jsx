@@ -7,9 +7,13 @@ import IngredientList from './components/IngredientList.jsx'
 import GetRecipe from './components/GetRecipe.jsx'
 import Recipe from './components/Recipe.jsx'
 
+
+import { getRecipeFromMistral } from "./ai"
+
+
 export default function App()
 {
-  const [ingredients, setIngredients] = useState(["oregano", "chicken", "Tomatoes", "Tomatoes"])
+  const [ingredients, setIngredients] = useState(["oregano", "chicken", "Tomatoes", "all main spices"])
 
   function AddIngredients(event)
   {
@@ -26,11 +30,18 @@ export default function App()
     setIngredients(prevIngredients => prevIngredients.filter((_, i) => i !== index));
   }
 
-  const [recipeShown, setRecipeShown] = useState(false)
+  const [recipe, setRecipe] = useState("")
 
-  function ShowRecipe()
+  async function ShowRecipe()
   {
-    setRecipeShown(function (prevState) { return !prevState })
+    //  console.log("API KEY:  " + import.meta.env.VITE_APP_AI)
+
+    const recipeIdea = await getRecipeFromMistral(ingredients)
+
+    setRecipe(recipeIdea)
+
+
+    console.log(recipeIdea)
   }
 
   return (
@@ -47,9 +58,8 @@ export default function App()
         <GetRecipe showRecipe={ShowRecipe} />
       }
 
-      {recipeShown && <div>
-        <h1>Mr. SaucePan Recommends:</h1>
-        <Recipe />
+      {recipe && <div>
+        <Recipe recipe={recipe} />
       </div>}
     </>
   )

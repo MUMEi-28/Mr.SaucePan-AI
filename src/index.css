@@ -127,3 +127,20 @@ section .ingridientItem button
   padding: 1rem;
   font-size: 1.1rem;
 }
+
+.suggested-recipe-container h1
+{
+  margin: 1rem 0;
+
+  text-align: left;
+}
+
+.suggested-recipe-container
+{
+  color: #475467;
+  line-height: 28px;
+  font-size: 1.125rem;
+  font-weight: 400;
+
+  margin: 1rem 5rem;
+}
